@@ -35,7 +35,6 @@ public class Controller {
                     Thread.sleep(5000L);
                     io.exit();
                 }
-
             }
             switch (status){
                 case EXIT -> io.exit();

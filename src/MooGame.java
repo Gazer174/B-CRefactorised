@@ -46,17 +46,10 @@ public class MooGame implements Game {
         if (currentId == 0){
             return "Enter your user name:\n";
         } else {
-            return "New game:\nFor practice, number is: \n";
+            return "New game:\nFor practice, number is: " + goalNumber() + "\n";
         }
 
     }
-    /*
-    public String newGameText(){
-        generateNumber();
-        return "New game:\nFor practice, number is: " + goalNumber() + "\n";
-    }
-
-     */
 
     public Status checkOutcome(String generatedOutcome, int id) {
         Status status;
