@@ -1,9 +1,9 @@
 
 public class MooGame implements Game {
     GameDAO connector;
-    public int guesses = 1;
+    public int nGuesses = 1;
     public int currentId = 0;
-    public String genNumber = "";
+    public String goalNumber = "";
     public String currentFeedback = "";
 
     public MooGame(GameDAO g) {
@@ -28,13 +28,14 @@ public class MooGame implements Game {
         }
         return status;
     }
-    public Status playGame(String input) {
-        String checkInput = generateFeedback(goalNumber(), input);
-        return checkOutcome(checkInput, currentId());
+    public Status playGame(String userInput) {
+        String InputToCheck = generateFeedback(goalNumber, userInput);
+        return checkOutcome(InputToCheck, currentId());
     }
     public Status playAgain(boolean b) {
         if (b){
-            guesses = 1;
+            nGuesses = 1;
+            currentFeedback = "";
             generateNumber();
             return Status.CONTINUEGAME;
 
@@ -42,23 +43,27 @@ public class MooGame implements Game {
             return Status.EXIT;
         }
     }
-    public String printStartText(){
+    public String printIntroOutroText(){
         if (currentId == 0){
             return "Enter your user name:\n";
+        } else if (currentFeedback.equals(goalNumber + "    ")) {
+            return "Correct, it took " + nGuesses + " guesses\nContinue?";
+        } else if (currentFeedback.isEmpty()){
+            return "New game:\nFor practice, number is: " + goalNumber + "\n";
         } else {
-            return "New game:\nFor practice, number is: " + goalNumber() + "\n";
+            return currentFeedback + "\n";
         }
 
     }
 
-    public Status checkOutcome(String generatedOutcome, int id) {
+    public Status checkOutcome(String userFeedback, int id) {
         Status status;
-        int nGuess = guesses;
+        int nGuess = nGuesses;
 
-        if (!generatedOutcome.equals("BBBB,")) {
-            currentFeedback += "\n" + generatedOutcome;
+        if (!userFeedback.equals("BBBB,")) {
+            currentFeedback += "\n" + userFeedback;
             nGuess++;
-            guesses = nGuess;
+            nGuesses = nGuess;
             status = Status.PLAYING_GAME;
         } else {
             status = Status.OK;
@@ -66,21 +71,12 @@ public class MooGame implements Game {
         connector.saveResult(nGuess,id);
         return status;
     }
-
-    public int nGuesses() {
-        return guesses;
-    }
-
-    public String goalNumber() {
-        return genNumber;
-    }
     public int currentId(){
         return currentId;
     }
-    public String currentFeedback(){
-        return currentFeedback;
+    public String noUserFoundText(){
+        return "User not in database, please register with admin";
     }
-
 
     public String generateNumber() {
         String goal = "";
@@ -93,7 +89,7 @@ public class MooGame implements Game {
             }
             goal = goal + randomDigit;
         }
-        genNumber = goal;
+        goalNumber = goal;
         return goal;
     }
     public String generateFeedback(String goal, String userGuess) {

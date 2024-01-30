@@ -16,7 +16,7 @@ public class Controller {
         while (true) {
             Status status;
             if (game.currentId() == 0){
-                io.addString(game.printStartText());
+                io.addString(game.printIntroOutroText());
                 String input = io.getString();
                 status = game.checkUser(input);
             } else {
@@ -24,14 +24,13 @@ public class Controller {
                 status = game.playGame(input);
             }
             switch (status){
-                case VERIFIED -> io.addString(game.printStartText());
-                case PLAYING_GAME -> io.addString(game.currentFeedback() + "\n");
+                case VERIFIED, PLAYING_GAME -> io.addString(game.printIntroOutroText());
                 case OK -> {
                     io.addString(gd.getTopList().toString());
-                    status = game.playAgain(io.yesNo("Correct, it took " + game.nGuesses() + " guesses\nContinue?"));
+                    status = game.playAgain(io.yesNo(game.printIntroOutroText()));
                 }
                 case NO_USER_FOUND -> {
-                    io.addString("User not in database, please register with admin");
+                    io.addString(game.noUserFoundText());
                     Thread.sleep(5000L);
                     io.exit();
                 }
@@ -40,7 +39,7 @@ public class Controller {
                 case EXIT -> io.exit();
                 case CONTINUEGAME ->{
                     io.clear();
-                    io.addString(game.printStartText());
+                    io.addString(game.printIntroOutroText());
                 }
             }
         }
