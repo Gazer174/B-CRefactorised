@@ -1,4 +1,12 @@
+/*  Hussein Adem 2024-01-29
+    Hussein.adem@hotmail.com
+
+    this class gets databas connection too Game.
+ */
+
 package dao;
+
+
 
 import java.sql.*;
 import java.util.ArrayList;

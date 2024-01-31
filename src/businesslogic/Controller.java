@@ -1,3 +1,9 @@
+/*  Hussein Adem 2024-01-26
+    Hussein.adem@hotmail.com
+
+    controller for Game. Adding and getting String from/to IO.
+ */
+
 package businesslogic;
 
 import businesslogic.Status;

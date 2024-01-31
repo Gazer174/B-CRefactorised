@@ -1,3 +1,9 @@
+/*  Hussein Adem 2024-01-30
+    Hussein.adem@hotmail.com
+
+    testing metods in MooGame
+ */
+
 package tests;
 
 import businesslogic.MooGame;

@@ -1,3 +1,9 @@
+/*  Hussein Adem 2024-01-26
+    Hussein.adem@hotmail.com
+
+    class for taking inputs and outputs
+ */
+
 package io;
 
 import javax.swing.*;

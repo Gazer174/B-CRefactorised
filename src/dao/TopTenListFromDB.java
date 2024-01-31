@@ -1,3 +1,9 @@
+/*  Hussein Adem 2024-01-29
+    Hussein.adem@hotmail.com
+
+    this class only returns a toString for displaying toptenList!
+ */
+
 package dao;
 
 import java.util.ArrayList;

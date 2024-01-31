@@ -1,3 +1,9 @@
+/*  Hussein Adem 2024-01-25
+    Hussein.adem@hotmail.com
+
+    Gamelogic class all metods for playing game here!
+ */
+
 package businesslogic;
 
 import dao.GameDAO;
