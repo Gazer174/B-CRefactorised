@@ -1,3 +1,5 @@
+package io;
+
 public interface IO {
     boolean yesNo(String prompt);
 

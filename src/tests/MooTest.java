@@ -1,3 +1,8 @@
+package tests;
+
+import businesslogic.MooGame;
+import businesslogic.Status;
+import dao.GameDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -46,17 +51,17 @@ public class MooTest {
     /*
     @Test
     public void testCheckUserVerified() {
-        // Arrange
-        GameDAO mockDAO = Mockito.mock(GameDAO.class);
+
+        dao.GameDAO mockDAO = Mockito.mock(dao.GameDAO.class);
         Mockito.when(mockDAO.getUserId("validInput")).thenReturn(1);
 
-        MooGame mooGame = new MooGame(mockDAO);
+        businesslogic.MooGame mooGame = new businesslogic.MooGame(mockDAO);
 
-        // Act
-        Status result = mooGame.checkUser("validInput");
 
-        // Assert
-        assertEquals(Status.VERIFIED, result);
+        businesslogic.Status result = mooGame.checkUser("validInput");
+
+
+        assertEquals(businesslogic.Status.VERIFIED, result);
         assertEquals(1, mooGame.currentId);
         assertNotNull(mooGame.genNumber);
         assertNotNull(mooGame.currentFeedback);

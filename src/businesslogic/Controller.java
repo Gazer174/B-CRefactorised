@@ -1,3 +1,9 @@
+package businesslogic;
+
+import businesslogic.Status;
+import dao.GameDAO;
+import io.IO;
+
 import java.sql.SQLException;
 
 public class Controller {
@@ -18,11 +24,13 @@ public class Controller {
             if (game.currentId() == 0){
                 io.addString(game.printIntroOutroText());
                 String input = io.getString();
-                status = game.checkUser(input);
+                status = game.playGame(input);
             } else {
                 String input = io.getString();
                 status = game.playGame(input);
             }
+
+
             switch (status){
                 case VERIFIED, PLAYING_GAME -> io.addString(game.printIntroOutroText());
                 case OK -> {

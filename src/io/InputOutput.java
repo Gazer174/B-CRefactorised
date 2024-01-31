@@ -1,6 +1,8 @@
+package io;
+
 import javax.swing.*;
 
-public class InputOutput implements IO{
+public class InputOutput implements IO {
     private SimpleWindow gw;
 
     public InputOutput(SimpleWindow gw){

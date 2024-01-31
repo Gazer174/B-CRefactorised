@@ -1,10 +1,12 @@
+package dao;
+
 import java.util.ArrayList;
 
-public class TopTenList {
+public class TopTenListFromDB {
 
         private ArrayList<PlayerAverage> topList;
 
-        public TopTenList(ArrayList<PlayerAverage> topList) {
+        public TopTenListFromDB(ArrayList<PlayerAverage> topList) {
             this.topList = topList;
         }
 

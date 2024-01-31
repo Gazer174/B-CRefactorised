@@ -1,8 +1,10 @@
+package dao;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class GameDAOImpl implements GameDAO{
+public class GameDAOImpl implements GameDAO {
     private Connection connection;
     private PreparedStatement getIdByName, getAllPlayers, getResultsById, saveResult;
 
@@ -32,7 +34,7 @@ public class GameDAOImpl implements GameDAO{
         }
         return id;
     }
-    public TopTenList getTopList(){
+    public TopTenListFromDB getTopList(){
         ArrayList<PlayerAverage> topList = new ArrayList();
         try {
             ResultSet rs = getAllPlayers.executeQuery();
@@ -59,7 +61,7 @@ public class GameDAOImpl implements GameDAO{
             throw new RuntimeException(e);
         }
         topList.sort(Comparator.comparingDouble(p -> p.average));
-        return new TopTenList(topList);
+        return new TopTenListFromDB(topList);
     }
     public void saveResult(int nGuess, int id){
         try{

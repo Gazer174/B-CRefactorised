@@ -1,13 +1,16 @@
+package businesslogic;
+
+import dao.GameDAO;
 
 public class MooGame implements Game {
     GameDAO connector;
     public int nGuesses = 1;
-    public int currentId = 0;
+    private int currentId = 0;
     public String goalNumber = "";
     public String currentFeedback = "";
 
-    public MooGame(GameDAO g) {
-        this.connector = g;
+    public MooGame(GameDAO gDao) {
+        this.connector = gDao;
     }
     public Status checkUser(String input) {
         Status status;
@@ -29,8 +32,13 @@ public class MooGame implements Game {
         return status;
     }
     public Status playGame(String userInput) {
-        String InputToCheck = generateFeedback(goalNumber, userInput);
-        return checkOutcome(InputToCheck, currentId());
+        if (currentId == 0){
+           return checkUser(userInput);
+        } else {
+            String InputToCheck = generateFeedback(goalNumber, userInput);
+            return checkOutcome(InputToCheck, currentId());
+        }
+
     }
     public Status playAgain(boolean b) {
         if (b){

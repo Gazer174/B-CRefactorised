@@ -1,3 +1,7 @@
+package businesslogic;
+
+import businesslogic.Status;
+
 import java.sql.SQLException;
 
 public interface Game {

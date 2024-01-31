@@ -1,3 +1,7 @@
+package io;
+
+import io.IO;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
