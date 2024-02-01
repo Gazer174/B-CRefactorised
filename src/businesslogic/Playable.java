@@ -6,11 +6,9 @@
 
 package businesslogic;
 
-import businesslogic.Status;
-
 import java.sql.SQLException;
 
-public interface Game {
+public interface Playable {
     Status checkUser(String input);
     String printIntroOutroText();
     Status playGame(String input) throws SQLException;

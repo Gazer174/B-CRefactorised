@@ -8,10 +8,10 @@ package businesslogic;
 
 import dao.GameDAO;
 
-public class MooGame implements Game {
+public class MooGame implements Playable {
     GameDAO connector;
     public int nGuesses = 1;
-    private int currentId = 0;
+    public int currentId = 0;
     public String goalNumber = "";
     public String currentFeedback = "";
 

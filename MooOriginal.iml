@@ -26,5 +26,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mockito-core-5.10.0-javadoc" level="project" />
+    <orderEntry type="library" name="mockito.core" level="application" />
   </component>
 </module>

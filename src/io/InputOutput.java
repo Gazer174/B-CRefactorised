@@ -9,9 +9,9 @@ package io;
 import javax.swing.*;
 
 public class InputOutput implements IO {
-    private SimpleWindow gw;
+    private IO gw;
 
-    public InputOutput(SimpleWindow gw){
+    public InputOutput(IO gw){
         this.gw = gw;
     }
 

@@ -12,15 +12,19 @@ import dao.GameDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MooTest {
+    //dependency på GameDAO
     GameDAO gDao;
     MooGame mooGame;
     @BeforeEach
     void setUp(){
+        //injiceras här
         mooGame = new MooGame(gDao);
     }
 
@@ -38,12 +42,28 @@ public class MooTest {
     public void testGenerateFeedback(){
         String checkInput1 = mooGame.generateFeedback("8975","8957");
         assertEquals("BB,CC",checkInput1);
+        assertNotEquals("BC,BC",checkInput1);
     }
 
     @Test
     public void testPlayAgain(){
         Status status = mooGame.playAgain(true);
         assertEquals(Status.CONTINUEGAME,status);
+
+    }
+
+    @Test
+    public void testCheckUserVerified() {
+        dao.GameDAO mockDAO = Mockito.mock(dao.GameDAO.class);
+        Mockito.when(mockDAO.getUserId("validInput")).thenReturn(1);
+
+        MooGame mooGame = new MooGame(mockDAO);
+        businesslogic.Status result = mooGame.checkUser("validInput");
+
+        assertEquals(businesslogic.Status.VERIFIED, result);
+        assertEquals(1, mooGame.currentId);
+        assertNotNull(mooGame.goalNumber);
+        assertNotNull(mooGame.currentFeedback);
     }
     private boolean areAllDigitsUnique(String str) {
         for (int i = 0; i < str.length(); i++) {
@@ -54,24 +74,6 @@ public class MooTest {
         }
         return true;
     }
-    /*
-    @Test
-    public void testCheckUserVerified() {
-
-        dao.GameDAO mockDAO = Mockito.mock(dao.GameDAO.class);
-        Mockito.when(mockDAO.getUserId("validInput")).thenReturn(1);
-
-        businesslogic.MooGame mooGame = new businesslogic.MooGame(mockDAO);
 
 
-        businesslogic.Status result = mooGame.checkUser("validInput");
-
-
-        assertEquals(businesslogic.Status.VERIFIED, result);
-        assertEquals(1, mooGame.currentId);
-        assertNotNull(mooGame.genNumber);
-        assertNotNull(mooGame.currentFeedback);
-    }
-
-     */
 }

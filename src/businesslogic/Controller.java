@@ -6,45 +6,45 @@
 
 package businesslogic;
 
-import businesslogic.Status;
 import dao.GameDAO;
 import io.IO;
 
 import java.sql.SQLException;
 
-public class Controller {
+public class Controller implements Controllable {
     GameDAO gd;
-    Game game;
+    Playable playable;
     IO io;
 
-    public Controller(Game game, IO io, GameDAO g) {
-        this.game = game;
+    public Controller(Playable playable, IO io, GameDAO g) {
+        this.playable = playable;
         this.io = io;
         this.gd = g;
     }
 
+    @Override
     public void run() throws SQLException, InterruptedException {
 
         while (true) {
             Status status;
-            if (game.currentId() == 0){
-                io.addString(game.printIntroOutroText());
+            if (playable.currentId() == 0){
+                io.addString(playable.printIntroOutroText());
                 String input = io.getString();
-                status = game.playGame(input);
+                status = playable.playGame(input);
             } else {
                 String input = io.getString();
-                status = game.playGame(input);
+                status = playable.playGame(input);
             }
 
 
             switch (status){
-                case VERIFIED, PLAYING_GAME -> io.addString(game.printIntroOutroText());
+                case VERIFIED, PLAYING_GAME -> io.addString(playable.printIntroOutroText());
                 case OK -> {
                     io.addString(gd.getTopList().toString());
-                    status = game.playAgain(io.yesNo(game.printIntroOutroText()));
+                    status = playable.playAgain(io.yesNo(playable.printIntroOutroText()));
                 }
                 case NO_USER_FOUND -> {
-                    io.addString(game.noUserFoundText());
+                    io.addString(playable.noUserFoundText());
                     Thread.sleep(5000L);
                     io.exit();
                 }
@@ -53,7 +53,7 @@ public class Controller {
                 case EXIT -> io.exit();
                 case CONTINUEGAME ->{
                     io.clear();
-                    io.addString(game.printIntroOutroText());
+                    io.addString(playable.printIntroOutroText());
                 }
             }
         }

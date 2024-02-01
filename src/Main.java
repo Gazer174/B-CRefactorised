@@ -4,10 +4,12 @@
     implements Dependency injection ONLY!
  */
 
+import businesslogic.Controllable;
 import businesslogic.Controller;
-import businesslogic.Game;
+import businesslogic.Playable;
 import businesslogic.MooGame;
 import dao.GameDAOImpl;
+import io.IO;
 import io.InputOutput;
 import io.SimpleWindow;
 
@@ -17,12 +19,13 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-        SimpleWindow gw = new SimpleWindow("Moo");
+        IO gw = new SimpleWindow("Moo");
         GameDAOImpl gameDAOImpl = new GameDAOImpl();
 
-        Game moo = new MooGame(gameDAOImpl);
-        InputOutput io = new InputOutput(gw);
-        Controller controller = new Controller(moo, io, gameDAOImpl);
+        Playable moo = new MooGame(gameDAOImpl);
+        IO io = new InputOutput(gw);
+
+        Controllable controller = new Controller(moo, io, gameDAOImpl);
         controller.run();
     }
 
