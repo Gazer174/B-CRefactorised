@@ -22,12 +22,5 @@ public class GameDaoImplTest {
         int result = gDao.getUserId("nonExistingUser");
         assertEquals(0,result);
     }
-    /*
-    @Test
-    public void saveResult(){
-        assertThrows(SQLException.class, () -> gDao.saveResult(-1,-1));
-    }
 
-     */
-    
 }
