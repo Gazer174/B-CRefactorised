@@ -6,16 +6,16 @@
 
 package businesslogic;
 
-import dao.GameDAO;
+import dao.GameDAOImpl;
 
-public class MooGame implements Playable {
-    GameDAO connector;
+public class MooGamePlay implements Playable {
+    GameDAOImpl connector;
     public int nGuesses = 1;
     public int currentId = 0;
     public String goalNumber = "";
     public String currentFeedback = "";
 
-    public MooGame(GameDAO gDao) {
+    public MooGamePlay(GameDAOImpl gDao) {
         this.connector = gDao;
     }
     public Status checkUser(String input) {
@@ -69,7 +69,6 @@ public class MooGame implements Playable {
         }
 
     }
-
     public Status checkOutcome(String userFeedback, int id) {
         Status status;
         int nGuess = nGuesses;

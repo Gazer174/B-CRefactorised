@@ -6,17 +6,17 @@
 
 package businesslogic;
 
-import dao.GameDAO;
+import dao.GameDAOImpl;
 import io.IO;
 
 import java.sql.SQLException;
 
 public class Controller implements Controllable {
-    GameDAO gd;
+    GameDAOImpl gd;
     Playable playable;
     IO io;
 
-    public Controller(Playable playable, IO io, GameDAO g) {
+    public Controller(Playable playable, IO io, GameDAOImpl g) {
         this.playable = playable;
         this.io = io;
         this.gd = g;

@@ -7,7 +7,8 @@
 import businesslogic.Controllable;
 import businesslogic.Controller;
 import businesslogic.Playable;
-import businesslogic.MooGame;
+import businesslogic.MooGamePlay;
+import dao.GameDAO;
 import dao.GameDAOImpl;
 import io.IO;
 import io.InputOutput;
@@ -20,12 +21,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         IO gw = new SimpleWindow("Moo");
-        GameDAOImpl gameDAOImpl = new GameDAOImpl();
+        GameDAOImpl gameDAO = new GameDAO();
 
-        Playable moo = new MooGame(gameDAOImpl);
+        Playable moo = new MooGamePlay(gameDAO);
         IO io = new InputOutput(gw);
 
-        Controllable controller = new Controller(moo, io, gameDAOImpl);
+        Controllable controller = new Controller(moo, io, gameDAO);
         controller.run();
     }
 

@@ -6,9 +6,9 @@
 
 package tests;
 
-import businesslogic.MooGame;
+import businesslogic.MooGamePlay;
 import businesslogic.Status;
-import dao.GameDAO;
+import dao.GameDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -18,20 +18,20 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MooTest {
+public class MooGamePlayTest {
     //dependency på GameDAO
-    GameDAO gDao;
-    MooGame mooGame;
+    GameDAOImpl gDao;
+    MooGamePlay mooGamePlay;
     @BeforeEach
     void setUp(){
         //injiceras här
-        mooGame = new MooGame(gDao);
+        mooGamePlay = new MooGamePlay(gDao);
     }
 
     @RepeatedTest(100)
     public void testGeneratedNumber(){
 
-        String generatedNumber = mooGame.generateNumber();
+        String generatedNumber = mooGamePlay.generateNumber();
         System.out.println(generatedNumber);
         assertEquals(4,generatedNumber.length());
         assertTrue(generatedNumber.matches("\\d+"));
@@ -40,30 +40,32 @@ public class MooTest {
     }
     @Test
     public void testGenerateFeedback(){
-        String checkInput1 = mooGame.generateFeedback("8975","8957");
+        String checkInput1 = mooGamePlay.generateFeedback("8975","8957");
         assertEquals("BB,CC",checkInput1);
         assertNotEquals("BC,BC",checkInput1);
     }
 
     @Test
     public void testPlayAgain(){
-        Status status = mooGame.playAgain(true);
+        Status status = mooGamePlay.playAgain(true);
         assertEquals(Status.CONTINUEGAME,status);
+        assertNotEquals(Status.EXIT, status);
+
 
     }
 
     @Test
     public void testCheckUserVerified() {
-        dao.GameDAO mockDAO = Mockito.mock(dao.GameDAO.class);
+        GameDAOImpl mockDAO = Mockito.mock(GameDAOImpl.class);
         Mockito.when(mockDAO.getUserId("validInput")).thenReturn(1);
 
-        MooGame mooGame = new MooGame(mockDAO);
-        businesslogic.Status result = mooGame.checkUser("validInput");
+        MooGamePlay mooGamePlay = new MooGamePlay(mockDAO);
+        businesslogic.Status result = mooGamePlay.checkUser("validInput");
 
         assertEquals(businesslogic.Status.VERIFIED, result);
-        assertEquals(1, mooGame.currentId);
-        assertNotNull(mooGame.goalNumber);
-        assertNotNull(mooGame.currentFeedback);
+        assertEquals(1, mooGamePlay.currentId);
+        assertNotNull(mooGamePlay.goalNumber);
+        assertNotNull(mooGamePlay.currentFeedback);
     }
     private boolean areAllDigitsUnique(String str) {
         for (int i = 0; i < str.length(); i++) {
