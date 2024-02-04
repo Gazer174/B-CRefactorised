@@ -32,11 +32,14 @@ public class MooGamePlayTest {
     public void testGeneratedNumber(){
 
         String generatedNumber = mooGamePlay.generateNumber();
-        System.out.println(generatedNumber);
         assertEquals(4,generatedNumber.length());
+
         assertTrue(generatedNumber.matches("\\d+"));
         assertTrue(areAllDigitsUnique(generatedNumber));
-        
+
+        assertFalse(generatedNumber.matches(".*\\D.*"));
+        assertFalse(areAllDigitsUnique(generatedNumber + generatedNumber));
+
     }
     @Test
     public void testGenerateFeedback(){

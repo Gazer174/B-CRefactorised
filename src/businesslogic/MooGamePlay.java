@@ -15,20 +15,17 @@ public class MooGamePlay implements Playable {
     public String goalNumber = "";
     public String currentFeedback = "";
 
-    public MooGamePlay(GameDAOImpl gDao) {
-        this.connector = gDao;
+    public MooGamePlay(GameDAOImpl connector) {
+        this.connector = connector;
     }
     public Status checkUser(String input) {
         Status status;
         try {
-            int id;
-            id = connector.getUserId(input);
+            int id = connector.getUserId(input);
             if (id != 0) {
                 currentId = id;
                 generateNumber();
                 status = Status.VERIFIED;
-            } else if (input.equals("exit")) {
-                status = Status.EXIT;
             } else {
                 status = Status.NO_USER_FOUND;
             }
@@ -92,18 +89,18 @@ public class MooGamePlay implements Playable {
     }
 
     public String generateNumber() {
-        String goal = "";
+        StringBuilder goal = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             int random = (int) (Math.random() * 10);
             String randomDigit = "" + random;
-            while (goal.contains(randomDigit)) {
+            while (goal.toString().contains(randomDigit)) {
                 random = (int) (Math.random() * 10);
                 randomDigit = "" + random;
             }
-            goal = goal + randomDigit;
+            goal.append(randomDigit);
         }
-        goalNumber = goal;
-        return goal;
+        goalNumber = goal.toString();
+        return goal.toString();
     }
     public String generateFeedback(String goal, String userGuess) {
         userGuess += "    ";

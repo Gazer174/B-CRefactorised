@@ -5,12 +5,11 @@ import dao.GameDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class GameDaoImplTest {
+public class GameDaoTest {
     GameDAOImpl gDao;
     @BeforeEach
     void setUp(){
